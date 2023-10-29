@@ -1,0 +1,23 @@
+diff --git a/node_modules/@hapi/hoek/lib/types.js b/node_modules/@hapi/hoek/lib/types.js
+index c291b65..7de0fb2 100755
+--- a/node_modules/@hapi/hoek/lib/types.js
++++ b/node_modules/@hapi/hoek/lib/types.js
+@@ -5,7 +5,6 @@ const internals = {};
+ 
+ exports = module.exports = {
+     array: Array.prototype,
+-    buffer: Buffer && Buffer.prototype,             // $lab:coverage:ignore$
+     date: Date.prototype,
+     error: Error.prototype,
+     generic: Object.prototype,
+@@ -34,10 +33,6 @@ exports.getInternalProto = function (obj) {
+         return exports.array;
+     }
+ 
+-    if (Buffer && obj instanceof Buffer) {          // $lab:coverage:ignore$
+-        return exports.buffer;
+-    }
+-
+     if (obj instanceof Date) {
+         return exports.date;
+     }

@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"editorconfig.editorconfig",
+		"bierner.markdown-checkbox",
+		"esbenp.prettier-vscode",
+		"jock.svg",
+		"bradlc.vscode-tailwindcss"
+	]
+}

@@ -1,0 +1,24 @@
+{
+	"name": "exercise-4-rsc-data-loading",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "node --loader=tsm ./scripts/build.ts",
+		"build:watch": "npx nodemon --exec \"npm run build\"",
+		"predeploy": "npm run build",
+		"deploy": "npx wrangler pages deploy ./dist-global --project-name=rsc-workshop",
+		"dev": "npx concurrently \"npm:build:watch\" \"npm:start\"",
+		"prestart": "npm run build",
+		"start": "npx wrangler pages dev --port=8004 --no-bundle ./dist-global"
+	},
+	"nodemonConfig": {
+		"ext": "*",
+		"watch": [
+			"./public/**/*",
+			"./scripts/**/*",
+			"./src/**/*",
+			"./global-worker/**/*",
+			"./region-worker/**/*"
+		]
+	}
+}
