@@ -17,12 +17,12 @@
 1.  Wrangler will print out a snippet of TOML which we can copy into our `wrangler-region.toml` and then add one extra line to (`migrations_dir = "./migrations"` to opt us into using migrations). **Also make sure you use your own database ID!**.
 
     ```toml
-     # ./wrangler-region.toml
+    # ./wrangler-region.toml
 
-    	name = "region-worker"
-    	main = "./dist-region/index.js"
-    	compatibility_date = "2023-11-09"
-    	compatibility_flags = ["nodejs_compat"]
+    name = "region-worker"
+    main = "./dist-region/index.js"
+    compatibility_date = "2023-11-09"
+    compatibility_flags = ["nodejs_compat"]
 
     [[d1_databases]]
     binding = "DB"
