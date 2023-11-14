@@ -46,6 +46,7 @@
     // ./scripts/build.ts
     import type { BuildResult } from "esbuild";
     import { build } from "esbuild";
+		import { cp } from "fs/promises";
     import { resolve } from "path";
     import { fileURLToPath } from "url";
     import {
@@ -265,7 +266,7 @@
     			REGION_WORKER_URL: JSON.stringify(
     				process.env.NODE_ENV === "production"
     					? `http://region-worker.${CLOUDFLARE_WORKERS_SUBDOMAIN}/`
-    					: "http://localhost:9006/",
+    					: "http://localhost:9005/",
     			),
     			"process.env.NODE_ENV": JSON.stringify("development"),
     		},
