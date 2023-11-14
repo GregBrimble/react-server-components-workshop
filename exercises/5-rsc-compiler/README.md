@@ -17,7 +17,7 @@
     Let's start by making a new Cloudflare Worker. We'll call this one our `region-worker`, in contrast with the `global-worker` we already have:
 
     ```tsx
-    // ./src/region-worker/index.tsx
+    // ./region-worker/index.tsx
     import React from "react";
     import { renderToReadableStream } from "react-server-dom-esm/server";
     import { App } from "../src/App.js";
