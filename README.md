@@ -57,7 +57,7 @@
 1. [Server-side rendering](./exercises/3-server-side-rendering)
 1. [RSC data loading](./exercises/4-rsc-data-loading)
 1. [RSC compiler](./exercises/5-rsc-compiler)
-1. [Server Actions](./exercises/6-server-actions)
+1. [Loading data from a database](./exercises/6-loading-data-from-a-database)
 1. [Smart Placement](./exercises/7-smart-placement)
 
 ## What's next?
