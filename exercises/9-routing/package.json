@@ -1,0 +1,28 @@
+{
+	"name": "exercise-9-routing",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "node --loader=tsm ./scripts/build.ts",
+		"build:watch": "npx nodemon --exec \"npm run build\"",
+		"predeploy": "npx cross-env NODE_ENV=production npm run build",
+		"deploy": "npm run deploy:region && npm run deploy:global",
+		"deploy:global": "npx wrangler pages deploy ./dist-global --project-name=rsc-workshop",
+		"deploy:region": "npx wrangler deploy -c wrangler-region.toml",
+		"dev": "npx concurrently \"npm:build:watch\" \"npm:start\"",
+		"prestart": "npm run build",
+		"start": "npx concurrently \"npm:start:global\" \"npm:start:region\"",
+		"start:global": "npx wrangler pages dev --port=8009 --no-bundle ./dist-global",
+		"start:region": "npx wrangler -c wrangler-region.toml dev --port=9009"
+	},
+	"nodemonConfig": {
+		"ext": "*",
+		"watch": [
+			"./public/**/*",
+			"./scripts/**/*",
+			"./src/**/*",
+			"./global-worker/**/*",
+			"./region-worker/**/*"
+		]
+	}
+}
