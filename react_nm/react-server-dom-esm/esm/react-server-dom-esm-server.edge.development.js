@@ -253,7 +253,6 @@ function resolveClientReferenceMetadata(config, clientReference) {
   return [transform(modulePath), exportName];
 }
 function getServerReferenceId(config, serverReference) {
-	console.log({ config, serverReference})
   return serverReference.$$id;
 }
 function getServerReferenceBoundArguments(config, serverReference) {
