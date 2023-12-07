@@ -253,7 +253,9 @@ function resolveClientReferenceMetadata(config, clientReference) {
   return [transform(modulePath), exportName];
 }
 function getServerReferenceId(config, serverReference) {
-  return serverReference.$$id;
+  var { baseURL, transform } = config;
+	var modulePath = serverReference.$$id.slice(baseURL.length);
+  return transform(modulePath);
 }
 function getServerReferenceBoundArguments(config, serverReference) {
   return serverReference.$$bound;
@@ -2904,7 +2906,7 @@ function importServerContexts(contexts) {
 
 // Module root path
 function resolveServerReference(config, id) {
-  var baseURL = config;
+  const { baseURL, transform } = config;
   var idx = id.lastIndexOf('#');
   var exportName = id.slice(idx + 1);
   var fullURL = id.slice(0, idx);
@@ -2913,8 +2915,10 @@ function resolveServerReference(config, id) {
     throw new Error('Attempted to load a Server Reference outside the hosted root.');
   }
 
+  var modulePath = fullURL.slice(baseURL.length);
+	console.log({ baseURL, fullURL, modulePath, transformed: transform(modulePath)})
   return {
-    specifier: fullURL,
+    specifier: transform(modulePath),
     name: exportName
   };
 }

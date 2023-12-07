@@ -2,8 +2,10 @@
 
 import { Suspense } from "react";
 import { BrowserReact } from "../../../utils/BrowserReact.js";
+import ClientC from "../my-other-dir/clientc.js";
 import type { RegionEnvironment } from "../types.js";
 import { Counter } from "./Counter.js";
+import { NewNote } from "./NewNote.js";
 import { Notes } from "./Notes.js";
 
 export function App({ env }: { env: RegionEnvironment }) {
@@ -17,9 +19,11 @@ export function App({ env }: { env: RegionEnvironment }) {
 			</head>
 			<body>
 				<div>
+					<ClientC />
 					<p>"Hello, world!" from server-side rendered React!</p>
 					<img src="/react-summit.svg" width="128" />
 					<Counter />
+					<NewNote />
 					<Suspense fallback={<p>Loading...</p>}>
 						{/* @ts-expect-error Async Server Component */}
 						<Notes env={env} />

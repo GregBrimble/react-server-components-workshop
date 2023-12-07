@@ -12,7 +12,7 @@ import { CLOUDFLARE_WORKERS_SUBDOMAIN } from "../../../constants.js";
 const MODULE_ROOT = resolve(fileURLToPath(import.meta.url), "../../src");
 
 async function buildGlobalWorker() {
-	await build({
+	const { metafile } = await build({
 		entryPoints: ["./global-worker/index.tsx", "./src/**/*"],
 		format: "esm",
 		platform: "neutral",
@@ -23,7 +23,9 @@ async function buildGlobalWorker() {
 		mainFields: ["workerd", "module", "main", "browser"],
 		bundle: true,
 		splitting: true,
+		metafile: true,
 		outdir: "./dist-global/_worker.js",
+		external: ["node:*"],
 		define: {
 			REGION_WORKER_URL: JSON.stringify(
 				process.env.NODE_ENV === "production"
@@ -34,11 +36,12 @@ async function buildGlobalWorker() {
 		},
 		outbase: "./global-worker",
 	});
+	console.log(metafile.outputs);
 }
 
 async function buildRegionWorker() {
 	await build({
-		entryPoints: ["./region-worker/index.tsx"],
+		entryPoints: ["./region-worker/index.tsx", "./src/**/*"],
 		format: "esm",
 		platform: "neutral",
 		conditions: [
@@ -46,11 +49,13 @@ async function buildRegionWorker() {
 			"react-server",
 		],
 		bundle: true,
+		splitting: true,
 		outdir: "./dist-region",
 		external: ["node:*"],
 		define: {
 			"process.env.NODE_ENV": JSON.stringify("development"),
 		},
+		outbase: "./region-worker",
 		plugins: [
 			{
 				name: "react-server-dom-esm-loader-region",

@@ -13,7 +13,7 @@
 		"prestart": "npm run build",
 		"start": "npx concurrently \"npm:start:global\" \"npm:start:region\"",
 		"start:global": "npx wrangler pages dev --port=8009 --no-bundle ./dist-global",
-		"start:region": "npx wrangler -c wrangler-region.toml dev --port=9009"
+		"start:region": "npx wrangler -c wrangler-region.toml dev --port=9009 --no-bundle"
 	},
 	"nodemonConfig": {
 		"ext": "*",

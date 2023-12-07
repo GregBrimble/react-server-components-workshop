@@ -3,6 +3,11 @@ main = "./dist-region/index.js"
 compatibility_date = "2023-11-09"
 compatibility_flags = ["nodejs_compat"]
 
+find_additional_modules = true
+rules = [
+  { type = "ESModule", globs = ["**/*.js"]},
+]
+
 [placement]
 mode = "smart"
 
