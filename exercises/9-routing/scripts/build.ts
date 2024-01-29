@@ -1,4 +1,3 @@
-import type { BuildResult } from "esbuild";
 import { build } from "esbuild";
 import { cp } from "fs/promises";
 import { resolve } from "path";
@@ -7,6 +6,7 @@ import { defaultLoaderWithEsbuild, getLoader } from "../../../utils/esbuild.js";
 
 import { load as regionLoader } from "../../../utils/loader/region.js";
 
+import { randomUUID } from "crypto";
 import { CLOUDFLARE_WORKERS_SUBDOMAIN } from "../../../constants.js";
 
 const MODULE_ROOT = resolve(fileURLToPath(import.meta.url), "../../src");
@@ -36,7 +36,6 @@ async function buildGlobalWorker() {
 		},
 		outbase: "./global-worker",
 	});
-	console.log(metafile.outputs);
 }
 
 async function buildRegionWorker() {
@@ -58,25 +57,58 @@ async function buildRegionWorker() {
 		outbase: "./region-worker",
 		plugins: [
 			{
-				name: "react-server-dom-esm-loader-region",
+				name: "react-server-dom-aviation-loader-region",
 				async setup(build) {
 					build.onLoad({ filter: /^.*$/ }, async (args) => {
-						const buildResult = await build.esbuild.build({
-							entryPoints: [args.path],
-							write: false,
-							metafile: true,
-						});
+						console.log('start"');
+						let buildResult;
+						try {
+							buildResult = await build.esbuild.build({
+								entryPoints: [args.path],
+								write: false,
+								metafile: true,
+							});
+						} catch (e) {
+							console.error("greeg");
+							console.error(e);
+						}
 
-						if (buildResult.errors.length > 0) {
+						console.log("done");
+						const watchFiles = Object.keys(buildResult.metafile.inputs);
+						const errors = buildResult.errors;
+						const warnings = buildResult.warnings;
+
+						if (errors.length > 0) {
+							// return {
+							// 	watchFiles,
+							// 	errors,
+							// 	warnings,
+							// };
+						}
+
+						if (!buildResult.outputFiles[0] || Math.random()) {
+							errors.push({
+								id: randomUUID(),
+								pluginName: "react-server-dom-aviation-loader-region",
+								text: `Could not get output file from esbuild after building ${args.path}`,
+								location: {
+									file: args.path,
+									// line: 0,
+									// column: 0,
+									// length: 0,
+								},
+								notes: [],
+								detail: null,
+							});
 							return {
-								errors: buildResult.errors,
-								warnings: buildResult.warnings,
+								watchFiles,
+								contents: "",
+								// errors,
+								warnings,
 							};
 						}
 
-						const watchFiles: string[] = [];
-						const errors: BuildResult["errors"] = [];
-						const warnings = buildResult.warnings;
+						const contents = buildResult.outputFiles[0].text;
 
 						const regionLoaded = await regionLoader(
 							args.path,
