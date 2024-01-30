@@ -1,0 +1,22 @@
+{
+	"name": "exercise-1-client-side-rendering",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "node --loader=tsm ./scripts/build.ts",
+		"build:watch": "npx nodemon --exec \"npm run build\"",
+		"dev": "npx concurrently \"npm:build:watch\" \"npm:start\"",
+		"prestart": "npm run build",
+		"start": "npx wrangler pages dev --port=8001 --no-bundle ./dist-global"
+	},
+	"nodemonConfig": {
+		"ext": "*",
+		"watch": [
+			"./public/**/*",
+			"./scripts/**/*",
+			"./src/**/*",
+			"./global-worker/**/*",
+			"./region-worker/**/*"
+		]
+	}
+}

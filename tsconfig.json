@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"esModuleInterop": true,
+		"jsx": "react-jsx",
+		"lib": ["ESNext", "DOM"],
+		"module": "ESNext",
+		"moduleDetection": "force",
+		"moduleResolution": "Bundler",
+		"noEmit": true,
+		"noUncheckedIndexedAccess": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "ESNext",
+		"types": ["@cloudflare/workers-types/experimental"],
+		"verbatimModuleSyntax": true
+	},
+	"exclude": [
+		"**/.wrangler/**/*",
+		"**/dist-region/**/*",
+		"**/dist-global/**/*",
+		"**/node_modules/**/*",
+		"**/react_nm/**/*"
+	]
+}

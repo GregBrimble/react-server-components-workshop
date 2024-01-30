@@ -1,0 +1,10 @@
+name = "region-worker"
+main = "./dist-region/index.js"
+compatibility_date = "2023-11-09"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "rsc-workshop"
+database_id = "ba1f64e1-7bc4-481e-9416-5bee74f31984" # REPLACE THIS WITH YOUR ID!
+migrations_dir = "./migrations"
