@@ -62,7 +62,7 @@
 
 ## What's next?
 
-**Thank you for participating in this React Server Components 2024 workshop! I hope you found it valuable and had fun. Please consider taking a few minutes to fill in [this survey](https://forms.gle/69tjByW4tWYFgkgr7) so I can improve for next time!**
+**Thank you for participating in this React Server Components 2024 workshop! I hope you found it valuable and had fun. If you're interested in being notified when my next workshop will be available, please [sign up here](https://bit.ly/taking-off-sign-up)!**
 
 After you've completed this workshop, there is much more you can explore with React Server Components and the Cloudflare Developer Platform. Some other topics of interest may include:
 
